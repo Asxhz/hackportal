@@ -4,6 +4,8 @@ A miniature hackathon management platform: applicants sign in and submit a role-
 
 **Stack:** Next.js 16 (App Router, Cache Components, `proxy.ts`), TypeScript, Tailwind v4, Supabase (Postgres + Auth), Vercel.
 
+**Live:** https://hackportal-two.vercel.app — demo organizer login `organizer@calhacks.test` / `Password123!!`. Sign up with any email to see the applicant side.
+
 ---
 
 ## How it fits together
