@@ -6,7 +6,7 @@ import { revalidatePath, revalidateTag } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 import { requireUser } from "@/lib/auth/session";
 import { checkRateLimit } from "@/lib/rate-limit";
-import { TRACKS, isAccountType, type AccountType } from "@/lib/tracks";
+import { TRACKS, isAccountType } from "@/lib/tracks";
 import { buildSchema, formDataToAnswers } from "@/lib/tracks/fields";
 import type { Json } from "@/lib/supabase/types";
 
@@ -25,25 +25,6 @@ function zodFieldErrors(err: z.ZodError): Record<string, string> {
     if (!out[k]) out[k] = issue.message;
   }
   return out;
-}
-
-/** Ensure the caller has a draft row for their account type; returns it. */
-export async function ensureDraft(): Promise<{ id: string; version: number; track: AccountType }> {
-  const user = await requireUser("/apply");
-  const supabase = await createClient();
-  const existing = await supabase.from("applications").select("id, version, track").maybeSingle();
-  if (existing.data) return existing.data as { id: string; version: number; track: AccountType };
-
-  // Track is taken from the profile server-side; RLS also asserts it.
-  const profile = await supabase.from("profiles").select("account_type").eq("id", user.id).single();
-  if (profile.error) throw profile.error;
-  const { data, error } = await supabase
-    .from("applications")
-    .insert({ user_id: user.id, track: profile.data.account_type })
-    .select("id, version, track")
-    .single();
-  if (error) throw error;
-  return data as { id: string; version: number; track: AccountType };
 }
 
 /**

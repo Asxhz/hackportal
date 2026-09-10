@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
 import { requireUser } from "@/lib/auth/session";
-import { getMyApplication } from "@/lib/applications/queries";
-import { ensureDraft } from "@/lib/applications/actions";
+import { getOrCreateMyApplication } from "@/lib/applications/queries";
 import { TRACKS } from "@/lib/tracks";
 import { emptyAnswers } from "@/lib/tracks/fields";
 import { PageHeader } from "@/components/portal/shell";
@@ -24,12 +23,7 @@ export default function ApplyPage() {
 
 async function Apply() {
   const user = await requireUser("/apply");
-  let app = await getMyApplication();
-  if (!app) {
-    await ensureDraft();
-    app = await getMyApplication();
-  }
-  if (!app) throw new Error("Could not create application");
+  const app = await getOrCreateMyApplication(user.id);
 
   const track = TRACKS[app.track];
   const answers = { ...emptyAnswers(track.sections), ...((app.answers as Record<string, unknown>) ?? {}) };
