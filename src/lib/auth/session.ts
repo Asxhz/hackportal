@@ -31,11 +31,18 @@ export const getSessionUser = cache(async (): Promise<SessionUser | null> => {
   if (error || !data?.claims) return null;
   const c = data.claims as Record<string, unknown>;
   if (typeof c.sub !== "string" || typeof c.email !== "string") return null;
+
+  // Fast path: role + account type come from the JWT (custom access-token hook).
+  if (typeof c.user_role === "string" && isAccountType(c.account_type)) {
+    return { id: c.sub, email: c.email, role: c.user_role === "organizer" ? "organizer" : "applicant", accountType: c.account_type };
+  }
+  // Fallback: hook not enabled or token predates it. One indexed lookup, RLS-scoped.
+  const { data: p } = await supabase.from("profiles").select("role, account_type").eq("id", c.sub).maybeSingle();
   return {
     id: c.sub,
     email: c.email,
-    role: c.user_role === "organizer" ? "organizer" : "applicant",
-    accountType: isAccountType(c.account_type) ? c.account_type : "hacker",
+    role: p?.role === "organizer" ? "organizer" : "applicant",
+    accountType: p?.account_type ?? "hacker",
   };
 });
 

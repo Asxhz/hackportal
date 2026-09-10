@@ -66,7 +66,10 @@ export async function proxy(request: NextRequest) {
     return withCsp(NextResponse.redirect(url), csp);
   }
 
-  if (claims && startsWithAny(path, ORGANIZER) && claims.user_role !== "organizer") {
+  // `user_role` is stamped by the custom access-token hook. If the claim is absent
+  // (hook not enabled yet, or token issued before enabling it) we let the request
+  // through: the organizer layout re-checks the role in the database and 403s.
+  if (claims && startsWithAny(path, ORGANIZER) && claims.user_role !== undefined && claims.user_role !== "organizer") {
     const url = request.nextUrl.clone();
     url.pathname = "/dashboard";
     url.search = "";
