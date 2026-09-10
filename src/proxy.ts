@@ -56,7 +56,7 @@ export async function proxy(request: NextRequest) {
 
   // Verifies signature locally via cached JWKS; refreshes the session if expired.
   const { data } = await supabase.auth.getClaims();
-  const claims = data?.claims as { user_role?: string } | undefined;
+  const claims = data?.claims as { sub?: string; user_role?: string } | undefined;
   const path = request.nextUrl.pathname;
 
   if (!claims && (startsWithAny(path, PROTECTED) || startsWithAny(path, ORGANIZER))) {
@@ -67,13 +67,20 @@ export async function proxy(request: NextRequest) {
   }
 
   // `user_role` is stamped by the custom access-token hook. If the claim is absent
-  // (hook not enabled yet, or token issued before enabling it) we let the request
-  // through: the organizer layout re-checks the role in the database and 403s.
-  if (claims && startsWithAny(path, ORGANIZER) && claims.user_role !== undefined && claims.user_role !== "organizer") {
-    const url = request.nextUrl.clone();
-    url.pathname = "/dashboard";
-    url.search = "";
-    return withCsp(NextResponse.redirect(url), csp);
+  // (hook not enabled yet, or token issued before enabling it) resolve the role from
+  // the database instead of trusting the gap: fail closed, never open.
+  if (claims && startsWithAny(path, ORGANIZER)) {
+    let role = claims.user_role;
+    if (role === undefined && typeof claims.sub === "string") {
+      const { data: profile } = await supabase.from("profiles").select("role").eq("id", claims.sub).maybeSingle();
+      role = profile?.role ?? "applicant";
+    }
+    if (role !== "organizer") {
+      const url = request.nextUrl.clone();
+      url.pathname = "/dashboard";
+      url.search = "";
+      return withCsp(NextResponse.redirect(url), csp);
+    }
   }
 
   if (claims && startsWithAny(path, AUTH_ONLY)) {
