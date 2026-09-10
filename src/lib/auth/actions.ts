@@ -5,6 +5,7 @@ import type { Route } from "next";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
+import { getSessionUser } from "@/lib/auth/session";
 import { checkRateLimit, clientIp } from "@/lib/rate-limit";
 import { ACCOUNT_TYPES } from "@/lib/tracks";
 import { env } from "@/lib/env";
@@ -58,10 +59,10 @@ export async function signIn(_prev: AuthState, formData: FormData): Promise<Auth
     return { error: "Email or password is incorrect." };
   }
 
-  const { data } = await supabase.auth.getClaims();
-  const role = (data?.claims as { user_role?: string } | undefined)?.user_role;
+  // Resolves role from the JWT claim, falling back to the DB if the hook isn't stamping it.
+  const user = await getSessionUser();
   revalidatePath("/", "layout");
-  redirect((safeNext(parsed.data.next) ?? (role === "organizer" ? "/organizer" : "/dashboard")) as Route);
+  redirect((safeNext(parsed.data.next) ?? (user?.role === "organizer" ? "/organizer" : "/dashboard")) as Route);
 }
 
 const signUpSchema = z.object({
