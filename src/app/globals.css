@@ -1,26 +1,79 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/*
+  Design tokens. Palette is a deliberate nod to Berkeley: deep "Berkeley Blue"
+  ink, "California Gold" accent, warm paper background. Everything else derives
+  from these so the whole portal reads as one system.
+*/
+@theme {
+  --color-paper: #f7f4ec;
+  --color-paper-2: #efeadd;
+  --color-ink: #0d1b2a;
+  --color-ink-2: #2a3b4d;
+  --color-ink-3: #5a6b7c;
+  --color-ink-4: #8d9aa8;
+  --color-line: #ddd6c6;
+  --color-line-2: #ccc3ae;
+  --color-berkeley: #003262;
+  --color-berkeley-2: #0b4a86;
+  --color-gold: #fdb515;
+  --color-gold-2: #e39f04;
+  --color-gold-soft: #fff1c9;
+  --color-green: #1f7a4d;
+  --color-green-soft: #dff3e6;
+  --color-red: #b3261e;
+  --color-red-soft: #fbe3e1;
+  --color-amber: #9a6700;
+  --color-amber-soft: #fff4d6;
+  --color-slate: #4a5b6c;
+  --color-slate-soft: #e7ebef;
+
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-instrument), Georgia, serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+
+  --shadow-card: 0 1px 2px rgba(13, 27, 42, 0.05), 0 4px 16px -8px rgba(13, 27, 42, 0.12);
+  --shadow-pop: 0 2px 6px rgba(13, 27, 42, 0.08), 0 16px 40px -16px rgba(13, 27, 42, 0.25);
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@layer base {
+  html { color-scheme: light; }
+  body {
+    @apply bg-paper text-ink antialiased;
+    font-feature-settings: "ss01", "cv11";
+    text-rendering: optimizeLegibility;
+  }
+  ::selection { background: var(--color-gold-soft); color: var(--color-ink); }
+  :focus-visible { outline: 2px solid var(--color-berkeley-2); outline-offset: 2px; border-radius: 3px; }
+  h1, h2, h3 { text-wrap: balance; }
+  p { text-wrap: pretty; }
+  input, textarea, select { font: inherit; }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer components {
+  .display { font-family: var(--font-display); letter-spacing: -0.01em; }
+  .eyebrow { @apply text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-3; }
+  .card { @apply rounded-lg border border-line bg-white shadow-card; }
+  .link { @apply text-berkeley-2 underline decoration-berkeley-2/30 underline-offset-[3px] transition hover:decoration-berkeley-2; }
+  .hairline { background: linear-gradient(90deg, transparent, var(--color-line-2), transparent); height: 1px; }
+  .paper-grid {
+    background-image:
+      linear-gradient(to right, rgba(13, 27, 42, 0.045) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(13, 27, 42, 0.045) 1px, transparent 1px);
+    background-size: 32px 32px;
+    mask-image: radial-gradient(ellipse at top, black 20%, transparent 75%);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
+@keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.rise { animation: rise 0.5s var(--ease-out-expo) both; }
+.rise-2 { animation: rise 0.5s var(--ease-out-expo) 0.06s both; }
+.rise-3 { animation: rise 0.5s var(--ease-out-expo) 0.12s both; }
+@media (prefers-reduced-motion: reduce) { .rise, .rise-2, .rise-3 { animation: none; } }

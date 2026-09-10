@@ -39,3 +39,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+!.env.example
+.preflight-ok
+.preflight-ok.tmp
+supabase/signing_keys.json
+.agent-browser*
