@@ -12,9 +12,11 @@ STAMP="$ROOT/.preflight-ok"
 if [ ! -f "$STAMP" ]; then
   echo "BLOCKED: production deploy without a preflight pass. Run: pnpm gate" >&2; exit 2
 fi
-TREE=$(git -C "$ROOT" rev-parse 'HEAD^{tree}' 2>/dev/null || echo no-git)
-DIRTY=$(git -C "$ROOT" status --porcelain 2>/dev/null | sort | git hash-object --stdin)
-CURRENT=$(printf '%s\n%s\n' "$TREE" "$DIRTY" | git hash-object --stdin)
+CURRENT=$(cd "$ROOT" && {
+    git ls-files -s 2>/dev/null
+    git diff HEAD 2>/dev/null
+    git ls-files --others --exclude-standard 2>/dev/null | sort | while read -r f; do printf '%s ' "$f"; git hash-object "$f"; done
+  } | git hash-object --stdin)
 if [ "$(cat "$STAMP")" != "$CURRENT" ]; then
   echo "BLOCKED: working tree changed since the last preflight pass. Run: pnpm gate" >&2; exit 2
 fi

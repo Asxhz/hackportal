@@ -2,7 +2,8 @@
 # =============================================================================
 # Deploy gate. `pnpm gate` must pass before anything reaches Vercel production.
 # The Claude Code hook in .claude/settings.json refuses `vercel --prod` unless
-# .preflight-ok exists AND matches the current tree hash, so a stale pass never
+# .preflight-ok exists AND matches a hash of the current working tree (tracked
+# content, unstaged diff, untracked file contents), so a stale pass never
 # authorizes a new deploy.
 # =============================================================================
 set -euo pipefail
@@ -77,7 +78,13 @@ if echo "$HDRS" | grep -qi "unsafe-eval"; then fail "production CSP contains uns
 echo "$REDIR" | grep -q "^307 .*/login" || fail "/organizer not gated for anonymous users ($REDIR)"
 ok "CSP / HSTS / frame / sniff / referrer present; organizer routes gated"
 
-TREE=$(git rev-parse 'HEAD^{tree}' 2>/dev/null || echo no-git)
-DIRTY=$(git status --porcelain 2>/dev/null | sort | git hash-object --stdin)
-printf '%s\n%s\n' "$TREE" "$DIRTY" | git hash-object --stdin > .preflight-ok
+tree_stamp() {
+  # Hash of: index (tracked content), unstaged diff, and every untracked file's content.
+  {
+    git ls-files -s 2>/dev/null
+    git diff HEAD 2>/dev/null
+    git ls-files --others --exclude-standard 2>/dev/null | sort | while read -r f; do printf '%s ' "$f"; git hash-object "$f"; done
+  } | git hash-object --stdin
+}
+tree_stamp > .preflight-ok
 printf '\n%s✓ Preflight passed. Stamp %s%s\n' "$GRN" "$(cat .preflight-ok)" "$NC"
