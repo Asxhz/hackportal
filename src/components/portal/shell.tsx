@@ -10,23 +10,23 @@ export function Shell({ user, nav, children }: { user: SessionUser; nav: NavItem
   const isOrganizer = user.role === "organizer";
   return (
     <div className="flex min-h-dvh flex-col">
-      <header className="sticky top-0 z-20 border-b border-line bg-paper/85 backdrop-blur-md">
+      <header className="sticky top-0 z-20 border-b border-white/10 bg-sky-navy text-white">
         <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-6">
           <div className="flex items-center gap-8">
-            <Logo href={isOrganizer ? "/organizer" : "/dashboard"} />
+            <Logo href={isOrganizer ? "/organizer" : "/dashboard"} className="text-white [&_.eyebrow]:text-white/60 [&>span:first-child]:bg-white/10" />
             <nav className="hidden items-center gap-1 sm:flex" aria-label="Primary">
               <NavLinks items={nav} />
             </nav>
           </div>
           <div className="flex items-center gap-3">
-            <span className="hidden items-center gap-2 text-[13px] text-ink-3 md:inline-flex">
-              <span className={cn("rounded-full px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wider", isOrganizer ? "bg-berkeley text-gold" : "bg-gold-soft text-amber")}>
+            <span className="hidden items-center gap-2 text-[13px] text-sky-ice/80 md:inline-flex">
+              <span className={cn("rounded-full px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wider", isOrganizer ? "bg-gold text-sky-navy" : "bg-sky-ice text-sky-navy")}>
                 {isOrganizer ? "Organizer" : user.accountType}
               </span>
               {user.email}
             </span>
             <form action={signOut}>
-              <button type="submit" className="rounded-md px-3 py-1.5 text-sm text-ink-3 transition hover:bg-paper-2 hover:text-ink">
+              <button type="submit" className="rounded-md px-3 py-1.5 text-sm text-sky-ice/80 transition hover:bg-white/10 hover:text-white">
                 Sign out
               </button>
             </form>

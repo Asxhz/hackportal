@@ -77,3 +77,77 @@
 .rise-2 { animation: rise 0.5s var(--ease-out-expo) 0.06s both; }
 .rise-3 { animation: rise 0.5s var(--ease-out-expo) 0.12s both; }
 @media (prefers-reduced-motion: reduce) { .rise, .rise-2, .rise-3 { animation: none; } }
+
+/* ---------- Cal Hacks 13.0 sky theme (landing + auth) ---------- */
+@theme {
+  --color-sky-navy: #11153d;
+  --color-sky-navy-2: #02205e;
+  --color-sky-blue: #75bcff;
+  --color-sky-lavender: #a7a5f9;
+  --color-sky-ice: #dfeeff;
+  --color-sky-ice-2: #d5ebff;
+  --color-sky-green: #b9df74;
+  --color-sky-teal: #2f7ab8;
+}
+
+@keyframes float-plane {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-14px) rotate(1.5deg); }
+}
+@keyframes drift {
+  from { transform: translateX(-4%); }
+  to { transform: translateX(4%); }
+}
+@keyframes drift-slow {
+  from { transform: translateX(3%); }
+  to { transform: translateX(-3%); }
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0.25; }
+  50% { opacity: 0.9; }
+}
+@keyframes shoot {
+  0% { transform: translate(0, 0) scale(0.9); opacity: 0; }
+  6% { opacity: 1; }
+  30% { transform: translate(-42vw, 26vh) scale(0.7); opacity: 0; }
+  100% { transform: translate(-42vw, 26vh) scale(0.7); opacity: 0; }
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.anim-plane { animation: float-plane 6s ease-in-out infinite; }
+.anim-drift { animation: drift 18s ease-in-out infinite alternate; }
+.anim-drift-slow { animation: drift-slow 26s ease-in-out infinite alternate; }
+.anim-twinkle { animation: twinkle 3.2s ease-in-out infinite; }
+.anim-shoot { animation: shoot 9s ease-in 2s infinite; }
+.anim-marquee { animation: marquee 48s linear infinite; }
+.anim-marquee:hover { animation-play-state: paused; }
+.anim-spin-slow { animation: spin-slow 240s linear infinite; }
+
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo); }
+.reveal.is-visible { opacity: 1; transform: none; }
+
+.cloud-pill {
+  @apply relative inline-flex items-center justify-center text-center font-semibold uppercase tracking-wide text-sky-navy;
+  background: var(--color-sky-ice);
+  border-radius: 999px;
+  box-shadow: 0 8px 24px -10px rgba(2, 32, 94, 0.6), inset 0 -3px 0 rgba(2, 32, 94, 0.08);
+}
+.cloud-pill::before, .cloud-pill::after {
+  content: ""; position: absolute; border-radius: 999px; background: inherit; z-index: -1;
+}
+.cloud-pill::before { width: 42%; height: 90%; top: -38%; left: 12%; }
+.cloud-pill::after { width: 34%; height: 75%; top: -28%; right: 16%; }
+
+.sky-text-shadow { text-shadow: 0 2px 0 rgba(2, 32, 94, 0.35), 0 10px 30px rgba(2, 32, 94, 0.5); }
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-plane, .anim-drift, .anim-drift-slow, .anim-twinkle, .anim-shoot, .anim-marquee, .anim-spin-slow { animation: none; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+}

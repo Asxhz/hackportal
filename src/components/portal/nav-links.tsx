@@ -22,7 +22,7 @@ export function NavLinks({ items, mobile = false }: { items: NavItem[]; mobile?:
             aria-current={active ? "page" : undefined}
             className={cn(
               "rounded-md px-3 py-1.5 text-sm transition whitespace-nowrap",
-              active ? "bg-white text-ink shadow-card" : "text-ink-3 hover:bg-paper-2 hover:text-ink",
+              active ? "bg-white text-sky-navy shadow-card" : "text-sky-ice/80 hover:bg-white/10 hover:text-white",
               mobile && "text-[13px]",
             )}
           >
