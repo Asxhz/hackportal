@@ -63,7 +63,7 @@ export function SiteFooter({ compact = false, dark = false }: { compact?: boolea
       <div className={t.rule}>
         <div className={`mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-2 px-6 py-4 text-xs ${t.foot}`}>
           <span>© 2026 Cal Hacks · Cal Hacks is a registered 501(c)(3) non-profit</span>
-          <span>Artwork and photos from calhacks.io</span>
+          <span>Event photos: Hackathons @ Berkeley · Venue photos: Will Truettner, Spencer DeMera (Unsplash)</span>
         </div>
       </div>
     </footer>

@@ -1,26 +1,10 @@
-import Image from "next/image";
-import starsBg from "@/images/ch/stars-bg.webp";
-import shootingStar from "@/images/ch/shooting-star.webp";
-
-/** Navy starfield with twinkling dots and a periodic shooting star. Purely decorative. */
-export function Starfield({ shooting = true }: { shooting?: boolean }) {
-  const dots = [
-    [6, 12, 3], [14, 30, 2], [22, 8, 2], [31, 22, 3], [38, 6, 2], [47, 16, 2], [55, 4, 3], [62, 24, 2], [70, 10, 2], [78, 28, 3], [86, 7, 2], [93, 18, 2],
-    [10, 48, 2], [26, 56, 2], [44, 44, 2], [58, 52, 3], [74, 46, 2], [90, 54, 2], [4, 70, 2], [34, 72, 2], [66, 68, 2], [96, 74, 3],
-  ];
+/** Soft lavender / sky-blue glows on navy with a grain overlay. Decorative only. */
+export function Glow({ className = "" }: { className?: string }) {
   return (
-    <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden bg-sky-navy">
-      <Image src={starsBg} alt="" fill sizes="100vw" className="object-cover opacity-70" />
-      {dots.map(([x, y, s], i) => (
-        <span
-          key={i}
-          className="anim-twinkle absolute rounded-full bg-gold"
-          style={{ left: `${x}%`, top: `${y}%`, width: s, height: s, animationDelay: `${(i % 7) * 0.45}s`, opacity: 0.6 }}
-        />
-      ))}
-      {shooting ? (
-        <Image src={shootingStar} alt="" width={140} height={157} className="anim-shoot absolute right-[8%] top-[6%] w-[110px] sm:w-[140px]" />
-      ) : null}
+    <div aria-hidden className={`grain pointer-events-none absolute inset-0 -z-10 overflow-hidden bg-sky-navy ${className}`}>
+      <div className="anim-blob absolute -left-[20%] -top-[30%] h-[70vh] w-[70vw] rounded-full bg-sky-lavender/25 blur-[120px]" />
+      <div className="anim-blob absolute -right-[15%] top-[10%] h-[60vh] w-[55vw] rounded-full bg-sky-blue/20 blur-[120px]" style={{ animationDelay: "-8s" }} />
+      <div className="anim-blob absolute bottom-[-20%] left-[20%] h-[50vh] w-[60vw] rounded-full bg-sky-teal/25 blur-[140px]" style={{ animationDelay: "-15s" }} />
     </div>
   );
 }

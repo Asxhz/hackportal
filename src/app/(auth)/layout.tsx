@@ -1,30 +1,33 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Logo } from "@/components/logo";
-import { Starfield } from "@/components/sky";
-import logo13 from "@/images/ch/logo13.svg";
-import earth from "@/images/ch/earth.webp";
-import oskiPlane from "@/images/ch/oski-plane.webp";
-import cloud11 from "@/images/ch/cloud-11.webp";
+import { Glow } from "@/components/sky";
+import p435 from "@/images/ch/photo-435.webp";
+import p423 from "@/images/ch/photo-423.webp";
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="grid min-h-dvh lg:grid-cols-[1.1fr_1fr]">
       <aside className="relative hidden overflow-hidden text-white lg:flex lg:flex-col lg:justify-between lg:p-12">
-        <Starfield shooting={false} />
-        <div className="pointer-events-none absolute -bottom-[62%] left-1/2 w-[140%] -translate-x-1/2">
-          <Image src={earth} alt="" priority sizes="60vw" className="anim-spin-slow w-full" />
-        </div>
-        <Image src={oskiPlane} alt="Oski the bear flying a red biplane" priority sizes="220px" className="anim-plane absolute right-[8%] top-[12%] w-[220px]" />
-        <Image src={cloud11} alt="" aria-hidden sizes="380px" className="anim-drift pointer-events-none absolute -right-16 top-[40%] w-[380px] opacity-70" />
-        <Link href="/" className="relative text-sm font-semibold text-sky-lavender hover:text-white">← Hackathons @ Berkeley</Link>
-        <div className="relative mb-24 max-w-md space-y-5">
-          <Image src={logo13} alt="Cal Hacks 13.0" className="w-[300px] drop-shadow-[0_12px_40px_rgba(2,32,94,0.6)]" />
-          <p className="text-[15px] leading-relaxed text-sky-ice sky-text-shadow">
+        <Glow />
+        <Link href="/" className="relative text-sm font-semibold text-sky-lavender hover:text-white">← Cal Hacks 13.0</Link>
+        <div className="relative">
+          <div className="relative mx-auto mb-10 h-[300px] w-[420px]">
+            <figure className="polaroid anim-float absolute left-0 top-0 w-[240px] rotate-[-6deg]" style={{ "--r": "-6deg" } as React.CSSProperties}>
+              <Image src={p435} alt="Three hackers smiling at Cal Hacks 12.0" sizes="240px" className="aspect-[4/3] w-full rounded-[8px] object-cover" />
+              <figcaption className="mt-2 text-center text-[12px] text-ink-3">team, found</figcaption>
+            </figure>
+            <figure className="polaroid anim-float absolute right-0 top-10 w-[200px] rotate-[5deg]" style={{ "--r": "5deg", animationDelay: "-4s" } as React.CSSProperties}>
+              <Image src={p423} alt="Attendees posing with the Oski mascot" sizes="200px" className="aspect-[4/4.2] w-full rounded-[8px] object-cover" />
+              <figcaption className="mt-2 text-center text-[12px] text-ink-3">with Oski</figcaption>
+            </figure>
+          </div>
+          <p className="display max-w-md text-[40px] leading-[1.05]">Thirty-six hours. <span className="italic text-sky-blue">Two thousand builders.</span></p>
+          <p className="mt-4 max-w-md text-[15px] leading-relaxed text-sky-ice/80">
             October 23–25, 2026 · Palace of Fine Arts, San Francisco. One account covers your application, its status, and your decision.
           </p>
         </div>
-        <p className="relative text-xs text-sky-lavender/70">Artwork from calhacks.io · Hackathons @ Berkeley</p>
+        <p className="relative text-xs text-sky-ice/50">Photos: Hackathons @ Berkeley, Cal Hacks 12.0</p>
       </aside>
       <main className="flex items-center justify-center px-6 py-12">
         <div className="w-full max-w-[400px]">

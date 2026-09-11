@@ -78,7 +78,7 @@
 .rise-3 { animation: rise 0.5s var(--ease-out-expo) 0.12s both; }
 @media (prefers-reduced-motion: reduce) { .rise, .rise-2, .rise-3 { animation: none; } }
 
-/* ---------- Cal Hacks 13.0 sky theme (landing + auth) ---------- */
+/* ---------- Night theme (landing + auth): navy, sky blue, lavender ---------- */
 @theme {
   --color-sky-navy: #11153d;
   --color-sky-navy-2: #02205e;
@@ -90,64 +90,35 @@
   --color-sky-teal: #2f7ab8;
 }
 
-@keyframes float-plane {
-  0%, 100% { transform: translateY(0) rotate(-2deg); }
-  50% { transform: translateY(-14px) rotate(1.5deg); }
-}
-@keyframes drift {
-  from { transform: translateX(-4%); }
-  to { transform: translateX(4%); }
-}
-@keyframes drift-slow {
-  from { transform: translateX(3%); }
-  to { transform: translateX(-3%); }
-}
-@keyframes twinkle {
-  0%, 100% { opacity: 0.25; }
-  50% { opacity: 0.9; }
-}
-@keyframes shoot {
-  0% { transform: translate(0, 0) scale(0.9); opacity: 0; }
-  6% { opacity: 1; }
-  30% { transform: translate(-42vw, 26vh) scale(0.7); opacity: 0; }
-  100% { transform: translate(-42vw, 26vh) scale(0.7); opacity: 0; }
-}
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-@keyframes spin-slow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
+@keyframes float-a { 0%, 100% { transform: translateY(0) rotate(var(--r, 0deg)); } 50% { transform: translateY(-10px) rotate(var(--r, 0deg)); } }
+@keyframes blob { 0%, 100% { transform: translate(0, 0) scale(1); } 33% { transform: translate(4%, -3%) scale(1.06); } 66% { transform: translate(-3%, 4%) scale(0.96); } }
+@keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes pulse-ring { 0% { transform: scale(1); opacity: 0.6; } 100% { transform: scale(2.2); opacity: 0; } }
 
-.anim-plane { animation: float-plane 6s ease-in-out infinite; }
-.anim-drift { animation: drift 18s ease-in-out infinite alternate; }
-.anim-drift-slow { animation: drift-slow 26s ease-in-out infinite alternate; }
-.anim-twinkle { animation: twinkle 3.2s ease-in-out infinite; }
-.anim-shoot { animation: shoot 9s ease-in 2s infinite; }
-.anim-marquee { animation: marquee 48s linear infinite; }
-.anim-marquee:hover { animation-play-state: paused; }
-.anim-spin-slow { animation: spin-slow 240s linear infinite; }
+.anim-float { animation: float-a 7s ease-in-out infinite; }
+.anim-blob { animation: blob 22s ease-in-out infinite; }
+.anim-ticker { animation: ticker 40s linear infinite; }
+.anim-marquee { animation: marquee 55s linear infinite; }
+.anim-marquee:hover, .anim-ticker:hover { animation-play-state: paused; }
+.anim-pulse-ring { animation: pulse-ring 2.4s ease-out infinite; }
 
 .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo); }
 .reveal.is-visible { opacity: 1; transform: none; }
 
-.cloud-pill {
-  @apply relative inline-flex items-center justify-center text-center font-semibold uppercase tracking-wide text-sky-navy;
-  background: var(--color-sky-ice);
-  border-radius: 999px;
-  box-shadow: 0 8px 24px -10px rgba(2, 32, 94, 0.6), inset 0 -3px 0 rgba(2, 32, 94, 0.08);
+.grain::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0.08; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
-.cloud-pill::before, .cloud-pill::after {
-  content: ""; position: absolute; border-radius: 999px; background: inherit; z-index: -1;
-}
-.cloud-pill::before { width: 42%; height: 90%; top: -38%; left: 12%; }
-.cloud-pill::after { width: 34%; height: 75%; top: -28%; right: 16%; }
+
+.polaroid { @apply rounded-[14px] bg-white p-2 pb-8 shadow-[0_24px_60px_-20px_rgba(2,32,94,0.7)]; }
+.tilt { transition: transform 0.5s var(--ease-out-expo), box-shadow 0.5s var(--ease-out-expo); }
+.tilt:hover { transform: translateY(-6px) rotate(var(--r, 0deg)) scale(1.02); }
 
 .sky-text-shadow { text-shadow: 0 2px 0 rgba(2, 32, 94, 0.35), 0 10px 30px rgba(2, 32, 94, 0.5); }
 
 @media (prefers-reduced-motion: reduce) {
-  .anim-plane, .anim-drift, .anim-drift-slow, .anim-twinkle, .anim-shoot, .anim-marquee, .anim-spin-slow { animation: none; }
+  .anim-float, .anim-blob, .anim-ticker, .anim-marquee, .anim-pulse-ring { animation: none; }
   .reveal { opacity: 1; transform: none; transition: none; }
+  .tilt, .tilt:hover { transition: none; transform: none; }
 }
