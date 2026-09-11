@@ -74,7 +74,7 @@ export default function HomePage() {
               Applications open
             </p>
             <h1 className="display text-[56px] leading-[0.98] sm:text-[84px]">
-              Cal Hacks <span className="italic text-sky-blue">13.0</span>
+              Cal Hacks <span className="text-sky-blue">13.0</span>
             </h1>
             <p className="mt-6 max-w-lg text-[17px] leading-relaxed text-sky-ice/90">
               Thirty-six hours at the Palace of Fine Arts with two thousand builders. Hackers, judges, mentors and volunteers apply here. Decisions show up on your dashboard, not buried in email.

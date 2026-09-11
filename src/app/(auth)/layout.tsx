@@ -22,7 +22,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
               <figcaption className="mt-2 text-center text-[12px] text-ink-3">with Oski</figcaption>
             </figure>
           </div>
-          <p className="display max-w-md text-[40px] leading-[1.05]">Thirty-six hours. <span className="italic text-sky-blue">Two thousand builders.</span></p>
+          <p className="display max-w-md text-[40px] leading-[1.05]">Thirty-six hours. <span className="text-sky-blue">Two thousand builders.</span></p>
           <p className="mt-4 max-w-md text-[15px] leading-relaxed text-sky-ice/80">
             October 23–25, 2026 · Palace of Fine Arts, San Francisco. One account covers your application, its status, and your decision.
           </p>
