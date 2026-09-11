@@ -4,6 +4,8 @@ A miniature hackathon management platform: applicants sign in and submit a role-
 
 **Stack:** Next.js 16 (App Router, Cache Components, `proxy.ts`), TypeScript, Tailwind v4, Supabase (Postgres + Auth), Vercel.
 
+**Repo:** https://github.com/Asxhz/hackportal
+
 **Live:** https://hackportal-two.vercel.app. Demo organizer login `organizer@calhacks.test` / `Password123!!`. Sign up with any email to see the applicant side.
 
 ---
@@ -57,6 +59,10 @@ Three layers say "no" independently. A bug in one cannot leak data:
 ### Rate limiting
 
 Fixed-window counters in Postgres (`consume_rate_limit`), keyed by a SHA-256 of `scope:subject` so the table never stores raw IPs or emails. The RPC is executable **only** by the service role, so clients can't poison counters. Rules live in `src/lib/rate-limit.ts`.
+
+### Design
+
+Navy, sky blue, lavender and ice, matched to the Cal Hacks 13.0 palette. Display type is Bricolage Grotesque, body is Geist; no serifs. The landing page uses real event photographs from Cal Hacks 12.0 (cropped from calhacks.io) and venue photographs of the Palace of Fine Arts (Unsplash). Motion is CSS only (floating polaroids, ticker, marquee, glow blobs, scroll reveal) and every animation is disabled under `prefers-reduced-motion`. Signed-in pages switch to a quiet paper background so forms and tables stay legible.
 
 ### The extra features
 
