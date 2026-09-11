@@ -118,7 +118,7 @@ async function Table({ filters }: { filters: ReturnType<typeof parseFilters> }) 
               <tr key={r.id} className="group transition hover:bg-paper/60">
                 <td className="px-4 py-3">
                   <Link href={`/organizer/applications/${r.id}`} className="font-medium text-ink group-hover:text-berkeley-2">
-                    {r.profile?.full_name || "—"}
+                    {r.profile?.full_name || "No name"}
                   </Link>
                   <p className="text-xs text-ink-4">{r.profile?.email}</p>
                 </td>
@@ -128,8 +128,8 @@ async function Table({ filters }: { filters: ReturnType<typeof parseFilters> }) 
                 <td className="px-4 py-3">
                   <StatusBadge status={r.status} />
                 </td>
-                <td className="px-4 py-3 text-ink-3 tabular-nums">{r.submitted_at ? new Date(r.submitted_at).toLocaleDateString("en-US", { month: "short", day: "numeric" }) : "—"}</td>
-                <td className="px-4 py-3 text-right tabular-nums">{avg !== null ? <span className="font-semibold">{avg.toFixed(1)}</span> : <span className="text-ink-4">—</span>}</td>
+                <td className="px-4 py-3 text-ink-3 tabular-nums">{r.submitted_at ? new Date(r.submitted_at).toLocaleDateString("en-US", { month: "short", day: "numeric" }) : "Not yet"}</td>
+                <td className="px-4 py-3 text-right tabular-nums">{avg !== null ? <span className="font-semibold">{avg.toFixed(1)}</span> : <span className="text-ink-4">No scores</span>}</td>
                 <td className="px-4 py-3 text-right tabular-nums">
                   {r.reviews.length}
                   {mine ? <span className="ml-1.5 text-[11px] font-semibold text-green">you</span> : null}

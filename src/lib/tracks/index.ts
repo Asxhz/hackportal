@@ -15,7 +15,7 @@ export type TrackDef = {
   tagline: string;
   description: string;
   sections: Section[];
-  /** Organizer scoring rubric, 1–5 per criterion. */
+  /** Organizer scoring rubric, 1 to 5 per criterion. */
   rubric: RubricCriterion[];
 };
 
@@ -50,7 +50,7 @@ export const TRACKS: Record<AccountType, TrackDef> = {
           ] },
           { key: "grad_year", type: "select", label: "Expected graduation", required: true, options: ["2026","2027","2028","2029","2030+"].map((y) => ({ value: y, label: y })) },
           { key: "hackathons_attended", type: "radio", label: "Hackathons attended", required: true, options: [
-            { value: "0", label: "This is my first" }, { value: "1-3", label: "1–3" }, { value: "4+", label: "4 or more" },
+            { value: "0", label: "This is my first" }, { value: "1-3", label: "1 to 3" }, { value: "4+", label: "4 or more" },
           ] },
         ],
       },
@@ -108,7 +108,7 @@ export const TRACKS: Record<AccountType, TrackDef> = {
           { key: "company", type: "text", label: "Company / organization", required: true, maxLength: 120 },
           { key: "title", type: "text", label: "Title", required: true, maxLength: 120 },
           { key: "years_experience", type: "select", label: "Years of experience", required: true, options: [
-            { value: "0-2", label: "0–2" }, { value: "3-5", label: "3–5" }, { value: "6-10", label: "6–10" }, { value: "10+", label: "10+" },
+            { value: "0-2", label: "0 to 2" }, { value: "3-5", label: "3 to 5" }, { value: "6-10", label: "6 to 10" }, { value: "10+", label: "10+" },
           ] },
           { key: "linkedin", type: "url", label: "LinkedIn", required: true, placeholder: "https://linkedin.com/in/you" },
           { key: "expertise", type: "multiselect", label: "Areas of expertise", required: true, options: [
@@ -125,7 +125,7 @@ export const TRACKS: Record<AccountType, TrackDef> = {
             { value: "yes", label: "Yes" }, { value: "no", label: "No" },
           ] },
           { key: "availability", type: "multiselect", label: "Availability", required: true, options: [
-            { value: "sunday_am", label: "Sunday 9am–12pm (expo)" }, { value: "sunday_pm", label: "Sunday 12pm–3pm (finals)" },
+            { value: "sunday_am", label: "Sunday 9am to 12pm (expo)" }, { value: "sunday_pm", label: "Sunday 12pm to 3pm (finals)" },
           ] },
           { key: "motivation", type: "textarea", label: "Why do you want to judge Cal Hacks?", required: true, minLength: 40, maxLength: 800 },
         ],
@@ -200,9 +200,9 @@ export const TRACKS: Record<AccountType, TrackDef> = {
         title: "Shifts",
         fields: [
           { key: "shifts", type: "multiselect", label: "Which shifts can you take?", required: true, min: 2, options: [
-            { value: "fri_pm", label: "Friday 3pm–9pm (check-in)" }, { value: "sat_am", label: "Saturday 7am–1pm" },
-            { value: "sat_pm", label: "Saturday 1pm–7pm" }, { value: "sat_night", label: "Saturday 7pm–1am" },
-            { value: "sun_am", label: "Sunday 7am–1pm" }, { value: "sun_pm", label: "Sunday 1pm–6pm (teardown)" },
+            { value: "fri_pm", label: "Friday 3pm to 9pm (check-in)" }, { value: "sat_am", label: "Saturday 7am to 1pm" },
+            { value: "sat_pm", label: "Saturday 1pm to 7pm" }, { value: "sat_night", label: "Saturday 7pm to 1am" },
+            { value: "sun_am", label: "Sunday 7am to 1pm" }, { value: "sun_pm", label: "Sunday 1pm to 6pm (teardown)" },
           ] },
           { key: "has_car", type: "radio", label: "Can you drive for supply runs?", required: true, options: [
             { value: "yes", label: "Yes" }, { value: "no", label: "No" },

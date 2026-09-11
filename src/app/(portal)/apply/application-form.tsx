@@ -171,7 +171,7 @@ function FieldControl({ field: f, value, error }: { field: FieldDef; value: unkn
       );
     case "textarea":
       return (
-        <Field id={f.key} label={f.label} required={f.required} help={f.help ?? `${f.minLength ? `${f.minLength}–` : "Up to "}${f.maxLength} characters`} error={error} className={cls}>
+        <Field id={f.key} label={f.label} required={f.required} help={f.help ?? `${f.minLength ? `${f.minLength} to ` : "Up to "}${f.maxLength} characters`} error={error} className={cls}>
           <Textarea id={f.key} name={f.key} defaultValue={typeof value === "string" ? value : ""} placeholder={f.placeholder} maxLength={f.maxLength} aria-invalid={!!error} aria-describedby={describedBy} />
         </Field>
       );

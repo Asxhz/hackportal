@@ -27,7 +27,7 @@ async function Team() {
             {organizers.map((o) => (
               <li key={o.id} className="flex items-center justify-between px-5 py-3 text-sm">
                 <div>
-                  <p className="font-medium">{o.full_name || "—"}</p>
+                  <p className="font-medium">{o.full_name || "No name"}</p>
                   <p className="text-xs text-ink-4">{o.email}</p>
                 </div>
                 <span className="text-xs text-ink-4">since {new Date(o.created_at).toLocaleDateString("en-US", { dateStyle: "medium" })}</span>

@@ -4,7 +4,7 @@ A miniature hackathon management platform: applicants sign in and submit a role-
 
 **Stack:** Next.js 16 (App Router, Cache Components, `proxy.ts`), TypeScript, Tailwind v4, Supabase (Postgres + Auth), Vercel.
 
-**Live:** https://hackportal-two.vercel.app — demo organizer login `organizer@calhacks.test` / `Password123!!`. Sign up with any email to see the applicant side.
+**Live:** https://hackportal-two.vercel.app. Demo organizer login `organizer@calhacks.test` / `Password123!!`. Sign up with any email to see the applicant side.
 
 ---
 
@@ -49,7 +49,7 @@ Three layers say "no" independently. A bug in one cannot leak data:
 
 ### Caching
 
-* **JWT verification is cached** (JWKS in memory) — the fast path for every request.
+* **JWT verification is cached** (JWKS in memory). This is the fast path for every request.
 * **React `cache()`** dedupes identity and data lookups within a render.
 * **`"use cache"` + `cacheTag("applications")`** for the organizer stats tiles; any decision or submission calls `revalidateTag`, so the numbers are shared across organizers but never stale.
 * **Partial Prerendering**: every route ships a static shell instantly; only session-aware fragments stream.
@@ -60,9 +60,9 @@ Fixed-window counters in Postgres (`consume_rate_limit`), keyed by a SHA-256 of 
 
 ### The extra features
 
-1. **Autosaving drafts** — ~1.2 s after the last keystroke, through the same Server Action as submit, with a flush on `pagehide`. Applicants never lose work.
-2. **Review queue** — "Review next" jumps to the oldest submission the current organizer hasn't scored; per-track rubrics; running average; blind to other reviewers' notes until you've saved yours.
-3. **Audit timeline** — applicant-safe and organizer-full views of the same event log.
+1. **Autosaving drafts**: about 1.2 s after the last keystroke, through the same Server Action as submit, with a flush on `pagehide`. Applicants never lose work.
+2. **Review queue**: "Review next" jumps to the oldest submission the current organizer hasn't scored; per-track rubrics; running average; blind to other reviewers' notes until you've saved yours.
+3. **Audit timeline**: applicant-safe and organizer-full views of the same event log.
 4. **CSV export** of the current filtered view (formula-injection-safe).
 
 ---

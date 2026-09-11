@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
 import { SiteFooter } from "@/components/site-footer";
-import { Glow } from "@/components/sky";
+import { Glow } from "@/components/glow";
 import { Reveal } from "@/components/reveal";
 import { buttonClass } from "@/components/ui/button";
 import { ACCOUNT_TYPES, TRACKS } from "@/lib/tracks";
@@ -26,7 +26,7 @@ import sudo2014 from "@/images/ch/2014-sudo-hack-group.webp";
 const STRIP = [p423, p425, p426, p429, p431, p434, p435, p436, p437];
 const TRACK_PHOTO = { hacker: p429, judge: p431, mentor: p437, volunteer: p434 } as const;
 
-const TICKER = ["October 23–25, 2026", "Palace of Fine Arts, San Francisco", "36 hours", "2,000+ hackers", "$100,000 in prizes", "MLH official 2027 season"];
+const TICKER = ["October 23 to 25, 2026", "Palace of Fine Arts, San Francisco", "36 hours", "2,000+ hackers", "$100,000 in prizes", "MLH official 2027 season"];
 
 const TIMELINE = [
   { d: "Sep 13", t: "Priority deadline", s: "Apply by this date to hear back first." },
@@ -64,7 +64,7 @@ export default function HomePage() {
       <section className="relative isolate overflow-hidden">
         <Image src={palaceNight} alt="" aria-hidden fill priority placeholder="blur" sizes="100vw" className="-z-20 object-cover object-center opacity-45" />
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-sky-navy/70 via-sky-navy/60 to-sky-navy" />
-        <div className="mx-auto grid max-w-7xl gap-12 px-6 pb-24 pt-32 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:pb-32 lg:pt-40">
+        <div className="mx-auto grid max-w-7xl gap-12 px-6 pb-14 pt-32 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:pb-20 lg:pt-36">
           <div className="rise">
             <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-sky-lavender/40 bg-sky-navy/60 px-3 py-1 text-[12px] font-semibold uppercase tracking-[0.14em] text-sky-lavender backdrop-blur">
               <span className="relative flex size-2">
@@ -88,7 +88,7 @@ export default function HomePage() {
               </Link>
             </div>
             <dl className="mt-12 grid max-w-md grid-cols-3 gap-6 border-t border-white/10 pt-6">
-              {[["Oct 23–25", "2026"], ["Sep 13", "priority deadline"], ["Sep 20", "regular deadline"]].map(([k, v]) => (
+              {[["Oct 23-25", "2026"], ["Sep 13", "priority deadline"], ["Sep 20", "regular deadline"]].map(([k, v]) => (
                 <div key={v}>
                   <dt className="display text-[26px] leading-none text-white">{k}</dt>
                   <dd className="mt-1 text-[13px] text-sky-ice/70">{v}</dd>
@@ -173,24 +173,29 @@ export default function HomePage() {
 
       {/* Dates + how it works */}
       <section id="dates" className="scroll-mt-20 bg-paper text-sky-navy">
-        <div className="mx-auto grid max-w-7xl gap-14 px-6 py-24 lg:grid-cols-[1.1fr_1fr]">
+        <div className="mx-auto max-w-7xl px-6 py-24">
+          <Reveal className="mb-8 flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <p className="eyebrow mb-2 text-sky-teal">Dates</p>
+              <h2 className="display text-[40px] leading-none">Two rounds. One portal.</h2>
+            </div>
+            <p className="max-w-sm text-sm text-ink-3">Apply in the priority round to hear back a week earlier. Both rounds use the same form.</p>
+          </Reveal>
           <Reveal>
-            <p className="eyebrow mb-2 text-sky-teal">Dates</p>
-            <h2 className="display text-[40px] leading-none">Two rounds. One portal.</h2>
-            <ol className="mt-10 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-5">
+            <ol className="grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-5">
               {TIMELINE.map((x, i) => (
                 <li key={x.t} className="bg-white p-5">
                   <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-sky-teal">Step {i + 1}</p>
-                  <p className="display mt-2 text-[26px] leading-none">{x.d}</p>
+                  <p className="display mt-2 text-[28px] leading-none">{x.d}</p>
                   <p className="mt-2 font-semibold">{x.t}</p>
                   <p className="mt-1 text-sm text-ink-3">{x.s}</p>
                 </li>
               ))}
             </ol>
           </Reveal>
-          <Reveal delay={120} className="flex flex-col justify-between gap-8">
-            <div>
-              <p className="eyebrow mb-2 text-sky-teal">How it works</p>
+          <div className="mt-14 grid gap-8 lg:grid-cols-2">
+            <Reveal delay={80} className="card p-6">
+              <p className="eyebrow mb-4 text-sky-teal">How the portal works</p>
               <ol className="space-y-5">
                 {[
                   ["Create an account", "Pick hacker, judge, mentor or volunteer. You can change it until you submit."],
@@ -206,26 +211,26 @@ export default function HomePage() {
                   </li>
                 ))}
               </ol>
-            </div>
-            <div className="card p-5">
-              <p className="eyebrow mb-3 text-sky-teal">Since 2014</p>
-              <div className="flex gap-3">
-                <Image src={floor2014} alt="The hacking floor at the first Cal Hacks in 2014" sizes="180px" className="h-[110px] w-auto rounded-lg object-cover" />
-                <Image src={organizers2014} alt="Cal Hacks organizers in 2014" sizes="120px" className="h-[110px] w-auto rounded-lg object-cover" />
-                <Image src={sudo2014} alt="The sudo hack team in 2014" sizes="130px" className="h-[110px] w-auto rounded-lg object-cover" />
+            </Reveal>
+            <Reveal delay={160} className="card p-6">
+              <p className="eyebrow mb-4 text-sky-teal">Since 2014</p>
+              <div className="grid grid-cols-3 gap-3">
+                <Image src={floor2014} alt="The hacking floor at the first Cal Hacks in 2014" loading="eager" sizes="200px" className="aspect-square w-full rounded-lg object-cover" />
+                <Image src={organizers2014} alt="Cal Hacks organizers in 2014" loading="eager" sizes="200px" className="aspect-square w-full rounded-lg object-cover" />
+                <Image src={sudo2014} alt="The sudo hack team in 2014" loading="eager" sizes="200px" className="aspect-square w-full rounded-lg object-cover" />
               </div>
               <p className="mt-4 text-sm leading-relaxed text-ink-2">
                 The first Cal Hacks filled Memorial Stadium in 2014. It is now run by Hackathons @ Berkeley, a student 501(c)(3), and takes over the Palace of Fine Arts every fall.
               </p>
-            </div>
-          </Reveal>
+            </Reveal>
+          </div>
         </div>
       </section>
 
       {/* Venue */}
       <section id="venue" className="relative isolate scroll-mt-20 overflow-hidden">
         <Image src={palaceDusk} alt="" aria-hidden fill sizes="100vw" className="-z-20 object-cover object-center" />
-        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-sky-navy via-sky-navy/70 to-sky-navy/20" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-sky-navy via-sky-navy/75 to-transparent" />
         <div className="mx-auto grid max-w-7xl gap-10 px-6 py-28 lg:grid-cols-[1fr_1fr]">
           <Reveal>
             <p className="eyebrow mb-2 text-sky-lavender">Venue</p>

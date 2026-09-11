@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Logo } from "@/components/logo";
-import { Glow } from "@/components/sky";
+import { Glow } from "@/components/glow";
 import p435 from "@/images/ch/photo-435.webp";
 import p423 from "@/images/ch/photo-423.webp";
 
@@ -24,7 +24,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
           </div>
           <p className="display max-w-md text-[40px] leading-[1.05]">Thirty-six hours. <span className="text-sky-blue">Two thousand builders.</span></p>
           <p className="mt-4 max-w-md text-[15px] leading-relaxed text-sky-ice/80">
-            October 23–25, 2026 · Palace of Fine Arts, San Francisco. One account covers your application, its status, and your decision.
+            October 23 to 25, 2026. Palace of Fine Arts, San Francisco. One account covers your application, its status, and your decision.
           </p>
         </div>
         <p className="relative text-xs text-sky-ice/50">Photos: Hackathons @ Berkeley, Cal Hacks 12.0</p>

@@ -13,7 +13,7 @@ export function Shell({ user, nav, children }: { user: SessionUser; nav: NavItem
       <header className="sticky top-0 z-20 border-b border-white/10 bg-sky-navy text-white">
         <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-6">
           <div className="flex items-center gap-8">
-            <Logo href={isOrganizer ? "/organizer" : "/dashboard"} className="text-white [&_.eyebrow]:text-white/60 [&>span:first-child]:bg-white/10" />
+            <Logo href={isOrganizer ? "/organizer" : "/dashboard"} className="text-white" />
             <nav className="hidden items-center gap-1 sm:flex" aria-label="Primary">
               <NavLinks items={nav} />
             </nav>

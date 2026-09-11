@@ -30,10 +30,10 @@ export function SiteFooter({ compact = false, dark = false }: { compact?: boolea
     <footer className={t.wrap}>
       <div className="mx-auto grid max-w-6xl gap-10 px-6 py-14 md:grid-cols-[1.4fr_1fr_1fr]">
         <div className="space-y-4">
-          <Logo className={dark ? "text-white [&_.eyebrow]:text-white/60" : undefined} />
+          <Logo className={dark ? "text-white" : undefined} />
           <p className={`max-w-sm text-sm leading-relaxed ${t.muted}`}>
             Cal Hacks is run by Hackathons @ Berkeley, a student organization at UC Berkeley and a registered 501(c)(3)
-            non-profit. Cal Hacks 13.0 takes place October 23–25, 2026 at the Palace of Fine Arts, San Francisco.
+            non-profit. Cal Hacks 13.0 takes place October 23 to 25, 2026 at the Palace of Fine Arts, San Francisco.
           </p>
           <p className="text-sm">
             <a className={t.a} href="mailto:team@hackberkeley.org">team@hackberkeley.org</a>

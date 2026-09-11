@@ -26,7 +26,7 @@ export function AnswersView({ sections, answers }: { sections: Section[]; answer
 }
 
 function render(f: Section["fields"][number], v: unknown) {
-  const empty = <span className="text-ink-4">—</span>;
+  const empty = <span className="text-ink-4">Not provided</span>;
   switch (f.type) {
     case "checkbox":
       return v === true ? "Agreed" : <span className="text-red">Not agreed</span>;
