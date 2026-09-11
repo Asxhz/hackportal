@@ -23,12 +23,12 @@ export default function DashboardPage({ searchParams }: { searchParams: SP }) {
 }
 
 const STATUS_COPY: Record<string, string> = {
-  draft: "You've started but not submitted. Finish when you're ready — nothing is sent until you hit submit.",
-  submitted: "Received. An organizer will review it soon.",
-  under_review: "Organizers are reading it now.",
-  accepted: "You're in. Watch your inbox for logistics.",
-  waitlisted: "You're on the waitlist. We'll let you know as spots open up.",
-  rejected: "We couldn't offer you a spot this time. Thank you for applying.",
+  draft: "Started, not submitted. Nothing is sent to organizers until you submit.",
+  submitted: "Received. Decisions go out after the application deadline.",
+  under_review: "An organizer is reviewing your application.",
+  accepted: "Accepted. Event logistics will be emailed to you.",
+  waitlisted: "Waitlisted. You will be notified if a spot opens.",
+  rejected: "Not accepted this year. Thank you for applying.",
 };
 
 async function Overview({ searchParams }: { searchParams: SP }) {
@@ -40,10 +40,10 @@ async function Overview({ searchParams }: { searchParams: SP }) {
     <>
       {sp.submitted ? (
         <Alert tone="success" className="rise mb-6">
-          Your application is in. We&apos;ll email you when there&apos;s a decision; you can also check back here any time.
+          Application submitted. Your status will update on this page when a decision is made.
         </Alert>
       ) : null}
-      <PageHeader eyebrow={`${track.label} application`} title={app ? STATUS_LABEL[app.status] : "Not started"} description={app ? STATUS_COPY[app.status] : `Your ${track.label.toLowerCase()} application takes about ten minutes. Drafts save automatically.`} />
+      <PageHeader eyebrow={`${track.label} application`} title={app ? STATUS_LABEL[app.status] : "Not started"} description={app ? STATUS_COPY[app.status] : `The ${track.label.toLowerCase()} application has ${track.sections.reduce((n, s) => n + s.fields.length, 0)} questions. Drafts save automatically.`} />
       <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
         <section className="card rise-2 p-6">
           <div className="flex items-start justify-between gap-4">

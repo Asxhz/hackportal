@@ -3,12 +3,13 @@ import { signOut } from "@/lib/auth/actions";
 import { cn } from "@/lib/cn";
 import type { SessionUser } from "@/lib/auth/session";
 import { NavLinks, type NavItem } from "./nav-links";
+import { SiteFooter } from "@/components/site-footer";
 
 /** Shared chrome for both signed-in areas. Nav differs by role; sign-out is a Server Action (POST, same-origin only). */
 export function Shell({ user, nav, children }: { user: SessionUser; nav: NavItem[]; children: React.ReactNode }) {
   const isOrganizer = user.role === "organizer";
   return (
-    <div className="min-h-dvh">
+    <div className="flex min-h-dvh flex-col">
       <header className="sticky top-0 z-20 border-b border-line bg-paper/85 backdrop-blur-md">
         <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-6">
           <div className="flex items-center gap-8">
@@ -35,7 +36,8 @@ export function Shell({ user, nav, children }: { user: SessionUser; nav: NavItem
           <NavLinks items={nav} mobile />
         </nav>
       </header>
-      <main className="mx-auto max-w-6xl px-6 py-10">{children}</main>
+      <main className="mx-auto w-full max-w-6xl flex-1 px-6 py-10">{children}</main>
+      <SiteFooter compact />
     </div>
   );
 }

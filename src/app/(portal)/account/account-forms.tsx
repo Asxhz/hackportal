@@ -32,7 +32,7 @@ export function AccountForms({ fullName, accountType, locked, hasDraft }: { full
         <div>
           <h2 className="display text-[22px]">Participation</h2>
           <p className="mt-1 text-sm text-ink-3">
-            {locked ? "Locked: your application has been submitted." : hasDraft ? "Switching discards your current draft." : "Choose how you want to take part."}
+            {locked ? "Locked because your application has been submitted." : hasDraft ? "Switching roles deletes your current draft." : "Choose the application you want to fill out."}
           </p>
         </div>
         {roleState.error ? <Alert tone="error">{roleState.error}</Alert> : null}

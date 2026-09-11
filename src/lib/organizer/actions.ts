@@ -16,7 +16,7 @@ const uuid = z.string().uuid();
 /** Upsert this organizer's review for an application. Rubric keys come from the track definition. */
 export async function submitReview(_prev: ActionState, formData: FormData): Promise<ActionState> {
   const user = await requireOrganizer();
-  if (!(await checkRateLimit("mutation", user.id))) return { error: "Too many actions. Take a breath." };
+  if (!(await checkRateLimit("mutation", user.id))) return { error: "Too many requests. Wait a minute and try again." };
 
   const appId = uuid.safeParse(formData.get("application_id"));
   const track = formData.get("track");
@@ -55,7 +55,7 @@ const decisionSchema = z.object({
 /** Set the final decision. Uses the version the organizer saw to avoid clobbering a concurrent decision. */
 export async function decide(_prev: ActionState, formData: FormData): Promise<ActionState> {
   const user = await requireOrganizer();
-  if (!(await checkRateLimit("mutation", user.id))) return { error: "Too many actions. Take a breath." };
+  if (!(await checkRateLimit("mutation", user.id))) return { error: "Too many requests. Wait a minute and try again." };
   const parsed = decisionSchema.safeParse(Object.fromEntries(formData));
   if (!parsed.success) return { error: "Malformed request." };
 
@@ -91,7 +91,7 @@ export async function goToNextUnreviewed(formData: FormData) {
 
 export async function promoteOrganizer(_prev: ActionState, formData: FormData): Promise<ActionState> {
   const user = await requireOrganizer();
-  if (!(await checkRateLimit("mutation", user.id))) return { error: "Too many actions." };
+  if (!(await checkRateLimit("mutation", user.id))) return { error: "Too many requests. Wait a minute and try again." };
   const email = z.string().trim().toLowerCase().email().safeParse(formData.get("email"));
   if (!email.success) return { error: "Enter a valid email." };
   const supabase = await createClient();

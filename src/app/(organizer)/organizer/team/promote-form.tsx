@@ -13,7 +13,7 @@ export function PromoteForm() {
     <form action={action} className="card rise-3 h-fit p-5 space-y-4">
       <div>
         <h2 className="display text-[22px]">Add an organizer</h2>
-        <p className="mt-1 text-sm text-ink-3">If they don&apos;t have an account yet, they&apos;ll become an organizer when they sign up.</p>
+        <p className="mt-1 text-sm text-ink-3">If they have no account yet, the role applies when they sign up with this email.</p>
       </div>
       {state.error ? <Alert tone="error">{state.error}</Alert> : state.ok ? <Alert tone="success">{state.message}</Alert> : null}
       <Field id="email" label="Email">

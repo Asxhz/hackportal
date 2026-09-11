@@ -34,7 +34,7 @@ async function Apply() {
         <PageHeader
           eyebrow={`${track.label} application`}
           title="Your answers"
-          description="Submitted applications are locked. If something is wrong, contact an organizer."
+          description="Submitted applications cannot be edited. To correct something, email team@hackberkeley.org."
           actions={<StatusBadge status={app.status} />}
         />
         <div className="card rise-2 p-6 sm:p-8">
@@ -54,7 +54,7 @@ async function Apply() {
       <PageHeader
         eyebrow={`${track.label} application`}
         title={track.tagline}
-        description="Everything saves as you type. Submit when every required field is filled in."
+        description="Answers save as you type. Submit when every required field is complete."
         actions={
           user.accountType !== app.track ? (
             <Link href="/account" className={buttonClass("secondary", "sm")}>

@@ -41,14 +41,14 @@ export async function saveApplication(prev: SaveState, formData: FormData): Prom
   if (!isAccountType(track) || !Number.isInteger(version)) return { status: "error", error: "Malformed request." };
 
   if (!(await checkRateLimit(mode === "submit" ? "mutation" : "autosave", user.id))) {
-    return { status: "error", error: "Slow down a little — too many saves." };
+    return { status: "error", error: "Too many saves in a short time. Wait a moment." };
   }
 
   const def = TRACKS[track];
   const raw = formDataToAnswers(def.sections, formData);
   const parsed = buildSchema(def.sections, mode).safeParse(raw);
   if (!parsed.success) {
-    if (mode === "submit") return { status: "error", error: "A few answers need attention.", fieldErrors: zodFieldErrors(parsed.error) };
+    if (mode === "submit") return { status: "error", error: "Some required answers are missing or invalid.", fieldErrors: zodFieldErrors(parsed.error) };
     // Autosave: store whatever is valid-shaped; drop only offending keys.
     const lenient = buildSchema(def.sections, "draft").safeParse(raw);
     if (!lenient.success) return { status: "error", error: "Could not save draft." };

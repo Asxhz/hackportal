@@ -6,8 +6,8 @@ export default function NotFound() {
     <main className="grid min-h-dvh place-items-center px-6">
       <div className="max-w-sm text-center">
         <p className="eyebrow mb-3">404</p>
-        <h1 className="display text-[36px]">Nothing here</h1>
-        <p className="mt-3 text-ink-3">That page doesn&apos;t exist or was moved.</p>
+        <h1 className="display text-[36px]">Page not found</h1>
+        <p className="mt-3 text-ink-3">Check the address, or go back to the start.</p>
         <Link href="/" className={buttonClass("secondary", "md", "mt-8")}>
           Go home
         </Link>

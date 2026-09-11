@@ -20,7 +20,7 @@ async function Team() {
   const organizers = await listOrganizers();
   return (
     <>
-      <PageHeader eyebrow="Team" title="Organizers" description="Anyone here can review applications, make decisions, and add other organizers." />
+      <PageHeader eyebrow="Team" title="Organizers" description="Organizers can review applications, record decisions, and add other organizers." />
       <div className="grid gap-6 lg:grid-cols-[1fr_360px]">
         <section className="card rise-2 overflow-hidden">
           <ul className="divide-y divide-line">

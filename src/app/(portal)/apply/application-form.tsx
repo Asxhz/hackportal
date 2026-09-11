@@ -91,7 +91,7 @@ export function ApplicationForm({ track, initial, version, updatedAt }: { track:
               <>
                 {" "}
                 <a href={`#${firstErrorKey}`} className="underline">
-                  Jump to the first one
+                  Go to the first one
                 </a>
                 .
               </>
@@ -125,7 +125,7 @@ export function ApplicationForm({ track, initial, version, updatedAt }: { track:
           <Button type="submit" size="lg" className="w-full" disabled={submitting}>
             {submitting ? "Submitting…" : "Submit application"}
           </Button>
-          <p className="mt-3 text-xs leading-relaxed text-ink-4">Submitting locks your answers. Required fields are marked with a gold asterisk.</p>
+          <p className="mt-3 text-xs leading-relaxed text-ink-4">Submitting locks your answers. Required fields are marked with an asterisk.</p>
         </div>
       </aside>
     </form>

@@ -90,7 +90,7 @@ async function Detail({ params }: { params: Promise<{ id: string }> }) {
               ) : null}
             </div>
             {others.length === 0 ? (
-              <p className="text-sm text-ink-4">No one else has reviewed this yet.</p>
+              <p className="text-sm text-ink-4">No other reviews yet.</p>
             ) : (
               <ul className="space-y-4">
                 {others.map((r) => (

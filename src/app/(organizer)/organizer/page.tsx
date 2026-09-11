@@ -33,7 +33,7 @@ async function Desk({ searchParams }: { searchParams: Promise<SP> }) {
       <PageHeader
         eyebrow="Review desk"
         title="Applications"
-        description="Everything that has been submitted, with scores from every reviewer."
+        description="All submitted applications with review scores."
         actions={
           <>
             <a href={`/api/organizer/export${qs ? `?${qs}` : ""}`} className={buttonClass("secondary", "sm")}>
@@ -48,7 +48,7 @@ async function Desk({ searchParams }: { searchParams: Promise<SP> }) {
           </>
         }
       />
-      {sp.done ? <Alert tone="success" className="mb-6">You&apos;ve reviewed everything in this queue. Nice.</Alert> : null}
+      {sp.done ? <Alert tone="success" className="mb-6">You have reviewed every application in this queue.</Alert> : null}
 
       <Suspense fallback={<div className="mb-6 h-20 animate-pulse rounded-lg bg-paper-2" />}>
         <Stats />
@@ -93,7 +93,7 @@ async function Table({ filters }: { filters: ReturnType<typeof parseFilters> }) 
     return (
       <div className="card rise-3 grid place-items-center px-6 py-16 text-center">
         <p className="display text-[22px]">No applications match</p>
-        <p className="mt-1 text-sm text-ink-3">Try clearing a filter.</p>
+        <p className="mt-1 text-sm text-ink-3">Clear a filter or check back after the deadline.</p>
       </div>
     );
   }

@@ -39,13 +39,13 @@ export function ReviewPanel({
           <ScoreRow key={c.key} name={`score_${c.key}`} label={c.label} help={c.help} value={mine?.scores[c.key]} />
         ))}
         <div className="hairline" />
-        <ScoreRow name="overall" label="Overall" help="Your gut call, 1–5." value={mine?.overall} emphasis />
+        <ScoreRow name="overall" label="Overall" help="Overall score, 1 to 5." value={mine?.overall} emphasis />
 
         <div className="space-y-1.5">
           <label htmlFor="notes" className="text-sm font-medium">
             Notes <span className="font-normal text-ink-4">(internal)</span>
           </label>
-          <Textarea id="notes" name="notes" defaultValue={mine?.notes ?? ""} maxLength={4000} className="min-h-24 text-sm" placeholder="What stood out? Anything the committee should know?" />
+          <Textarea id="notes" name="notes" defaultValue={mine?.notes ?? ""} maxLength={4000} className="min-h-24 text-sm" placeholder="Notes for other reviewers." />
         </div>
         <Button type="submit" className="w-full" disabled={reviewing}>
           {reviewing ? "Saving…" : mine ? "Update review" : "Save review"}
@@ -73,7 +73,7 @@ export function ReviewPanel({
             Reopen for review
           </button>
         ) : null}
-        <p className="text-xs leading-relaxed text-ink-4">Decisions are visible to the applicant immediately and recorded in the timeline.</p>
+        <p className="text-xs leading-relaxed text-ink-4">The applicant sees the decision immediately. It is recorded in the timeline with your name.</p>
       </form>
     </>
   );

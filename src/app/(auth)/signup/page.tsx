@@ -13,7 +13,7 @@ export default function SignupPage({ searchParams }: { searchParams: SP }) {
     <div className="rise space-y-8">
       <div className="space-y-2">
         <h1 className="display text-[34px] leading-tight">Create your account</h1>
-        <p className="text-[15px] text-ink-3">Pick how you want to take part. You can change this until you submit.</p>
+        <p className="text-[15px] text-ink-3">Choose a role. You can change it until you submit an application.</p>
       </div>
       <Suspense fallback={<div className="h-96" />}>
         <Dynamic searchParams={searchParams} />

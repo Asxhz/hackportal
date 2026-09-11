@@ -21,7 +21,7 @@ export function SignupForm({ preset }: { preset?: AccountType }) {
       {state.error ? <Alert tone="error">{state.error}</Alert> : null}
 
       <fieldset className="space-y-2">
-        <legend className="text-sm font-medium">I want to join as a</legend>
+        <legend className="text-sm font-medium">Applying as</legend>
         <div className="grid grid-cols-2 gap-2">
           {ACCOUNT_TYPES.map((t) => (
             <label

@@ -36,8 +36,8 @@ export const TRACKS: Record<AccountType, TrackDef> = {
     id: "hacker",
     label: "Hacker",
     plural: "Hackers",
-    tagline: "Build something in 36 hours.",
-    description: "Students of any level who want to ship a project with a team.",
+    tagline: "Hacker application",
+    description: "Students who want to build a project over 36 hours. Teams of up to four; you can find teammates at the event.",
     sections: [
       {
         title: "About you",
@@ -66,8 +66,8 @@ export const TRACKS: Record<AccountType, TrackDef> = {
       {
         title: "Short answers",
         fields: [
-          { key: "why", type: "textarea", label: "Why do you want to attend Cal Hacks?", required: true, minLength: 80, maxLength: 1200, help: "A few sentences is plenty." },
-          { key: "proud_project", type: "textarea", label: "Tell us about something you built or learned that you're proud of.", required: true, minLength: 80, maxLength: 1200, help: "Doesn't have to be code." },
+          { key: "why", type: "textarea", label: "Why do you want to attend Cal Hacks?", required: true, minLength: 80, maxLength: 1200, help: "Two to four sentences." },
+          { key: "proud_project", type: "textarea", label: "Tell us about something you built or learned that you're proud of.", required: true, minLength: 80, maxLength: 1200, help: "Code, hardware, research, a club, anything." },
         ],
       },
       {
@@ -89,9 +89,9 @@ export const TRACKS: Record<AccountType, TrackDef> = {
       },
     ],
     rubric: [
-      { key: "motivation", label: "Motivation", help: "Do they clearly want to be here and know why?" },
-      { key: "technical", label: "Technical depth", help: "Evidence of building, learning, or shipping." },
-      { key: "communication", label: "Communication", help: "Clear, specific, concrete writing." },
+      { key: "motivation", label: "Motivation", help: "Clear reason for attending." },
+      { key: "technical", label: "Technical depth", help: "Evidence of building or shipping something." },
+      { key: "communication", label: "Communication", help: "Specific, concrete answers." },
     ],
   },
 
@@ -99,8 +99,8 @@ export const TRACKS: Record<AccountType, TrackDef> = {
     id: "judge",
     label: "Judge",
     plural: "Judges",
-    tagline: "Evaluate final projects on Sunday.",
-    description: "Industry engineers, founders and researchers who score demos.",
+    tagline: "Judge application",
+    description: "Engineers, founders and researchers who score projects during the Sunday expo and finals.",
     sections: [
       {
         title: "Professional background",
@@ -143,8 +143,8 @@ export const TRACKS: Record<AccountType, TrackDef> = {
     id: "mentor",
     label: "Mentor",
     plural: "Mentors",
-    tagline: "Unblock teams all weekend.",
-    description: "Engineers who roam the floor and help teams get unstuck.",
+    tagline: "Mentor application",
+    description: "Engineers who help teams debug and make technical decisions during the event.",
     sections: [
       {
         title: "Background",
@@ -177,7 +177,7 @@ export const TRACKS: Record<AccountType, TrackDef> = {
     rubric: [
       { key: "skills", label: "Skill coverage", help: "Breadth and depth of helpful skills." },
       { key: "availability", label: "Availability", help: "Hours on the floor, especially Saturday night." },
-      { key: "communication", label: "Communication", help: "Bio is clear and approachable." },
+      { key: "communication", label: "Communication", help: "Bio is clear and useful to hackers." },
     ],
   },
 
@@ -185,8 +185,8 @@ export const TRACKS: Record<AccountType, TrackDef> = {
     id: "volunteer",
     label: "Volunteer",
     plural: "Volunteers",
-    tagline: "Keep the event running.",
-    description: "Check-in, food, logistics, and being a friendly face.",
+    tagline: "Volunteer application",
+    description: "Check-in, meals, logistics and event operations. Shift-based, before and during the event.",
     sections: [
       {
         title: "About you",
@@ -214,7 +214,7 @@ export const TRACKS: Record<AccountType, TrackDef> = {
     ],
     rubric: [
       { key: "reliability", label: "Reliability", help: "Shift coverage and commitment." },
-      { key: "attitude", label: "Attitude", help: "Warmth and willingness to help." },
+      { key: "attitude", label: "Attitude", help: "Reason for volunteering is genuine." },
     ],
   },
 };

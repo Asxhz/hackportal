@@ -7,7 +7,7 @@ export default function Forbidden() {
       <div className="max-w-sm text-center">
         <p className="eyebrow mb-3">403</p>
         <h1 className="display text-[36px]">Organizers only</h1>
-        <p className="mt-3 text-ink-3">Your account doesn&apos;t have access to the review desk.</p>
+        <p className="mt-3 text-ink-3">This account is not an organizer account.</p>
         <Link href="/dashboard" className={buttonClass("secondary", "md", "mt-8")}>
           Back to your dashboard
         </Link>
