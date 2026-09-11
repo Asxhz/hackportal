@@ -93,5 +93,5 @@ Eight steps: secret/boundary scan → lint → types → migrations from zero �
 |---|---|---|
 | `NEXT_PUBLIC_SUPABASE_URL` | public | Project URL |
 | `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | public | Anon key; every query it makes is RLS-scoped |
-| `SUPABASE_SECRET_KEY` | server | Service role. Used for exactly two things: rate-limit RPC and cached organizer stats |
+| `SUPABASE_SECRET_KEY` | server | Service role. Used for exactly three things: rate-limit RPC, cached organizer stats, creating pre-confirmed auth users at signup |
 | `NEXT_PUBLIC_SITE_URL` | public | Absolute origin for auth redirects |

@@ -7,7 +7,8 @@ import type { Database } from "@/lib/supabase/types";
 /**
  * Service-role client. Bypasses RLS, so its use is deliberately narrow:
  *   1. the rate-limit counter RPC (must not be callable by anonymous clients);
- *   2. the cached, organizer-only aggregate stats (a cached scope has no cookies).
+ *   2. the cached, organizer-only aggregate stats (a cached scope has no cookies);
+ *   3. creating a pre-confirmed auth user at signup (no outbound email dependency).
  * Never pass this client to anything that reads or writes per-user rows.
  */
 export function createAdminClient() {

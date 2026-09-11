@@ -20,7 +20,7 @@ step "1/8 Secrets never leave the machine"
 if git ls-files --error-unmatch .env.local >/dev/null 2>&1; then fail ".env.local is tracked by git"; fi
 if git ls-files | grep -qE 'signing_keys\.json$'; then fail "JWT signing key is tracked by git"; fi
 if grep -rInE '(sb_secret_|eyJhbGciOi)' src --include='*.ts' --include='*.tsx'; then fail "secret-looking literal in src/"; fi
-ADMIN_IMPORTS=$(grep -rl "supabase/admin" src | grep -vE 'src/lib/(rate-limit|organizer/queries)\.ts$' || true)
+ADMIN_IMPORTS=$(grep -rl "supabase/admin" src | grep -vE 'src/lib/(rate-limit|organizer/queries|auth/actions)\.ts$' || true)
 [ -z "$ADMIN_IMPORTS" ] || fail "unexpected admin-client import: $ADMIN_IMPORTS"
 for f in $(grep -rl '^"use client"' src); do
   if grep -qE 'from "@/lib/(supabase/(server|admin)|auth/session|rate-limit)"' "$f"; then fail "client component imports server-only module: $f"; fi

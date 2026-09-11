@@ -5,10 +5,10 @@ import type { Route } from "next";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 import { getSessionUser } from "@/lib/auth/session";
 import { checkRateLimit, clientIp } from "@/lib/rate-limit";
 import { ACCOUNT_TYPES } from "@/lib/tracks";
-import { env } from "@/lib/env";
 
 export type AuthState = { error?: string; fieldErrors?: Record<string, string>; ok?: boolean; message?: string };
 
@@ -79,30 +79,37 @@ export async function signUp(_prev: AuthState, formData: FormData): Promise<Auth
   const ip = await clientIp();
   if (!(await checkRateLimit("signupIp", ip))) return { error: "Too many sign-ups from this network. Try again later." };
 
-  const supabase = await createClient();
-  const { data, error } = await supabase.auth.signUp({
+  // Create the user already confirmed via the server-side admin API. This portal
+  // doesn't gate on email verification (organizers decide who gets in), and it
+  // removes the dependency on outbound email entirely. The admin client never
+  // touches user data here; it only creates the auth identity.
+  const admin = createAdminClient();
+  const { error: createError } = await admin.auth.admin.createUser({
     email: parsed.data.email,
     password: parsed.data.password,
-    options: {
-      emailRedirectTo: `${env.NEXT_PUBLIC_SITE_URL}/auth/confirm`,
-      // Read by the `handle_new_user` trigger; validated there as well.
-      data: { full_name: parsed.data.full_name, account_type: parsed.data.account_type },
-    },
+    email_confirm: true,
+    // Read by the `handle_new_user` trigger; validated there as well.
+    user_metadata: { full_name: parsed.data.full_name, account_type: parsed.data.account_type },
   });
-  if (error) {
-    if (error.code === "user_already_exists" || error.code === "email_exists") {
+  if (createError) {
+    if (createError.code === "email_exists" || createError.code === "user_already_exists" || createError.status === 422) {
       return { error: "An account with that email already exists. Sign in instead." };
     }
-    if (error.code === "weak_password") return { fieldErrors: { password: "That password is too easy to guess." } };
+    if (createError.code === "weak_password") return { fieldErrors: { password: "That password is too easy to guess." } };
+    console.error("[signUp]", createError);
     return { error: "Could not create your account. Please try again." };
   }
 
-  // Confirmation disabled -> session exists -> go straight in.
-  if (data.session) {
-    revalidatePath("/", "layout");
-    redirect("/dashboard");
-  }
-  return { ok: true, message: "Check your email for a confirmation link to finish signing up." };
+  // Sign the new user in with their own credentials so cookies are issued normally.
+  const supabase = await createClient();
+  const { error: signInError } = await supabase.auth.signInWithPassword({
+    email: parsed.data.email,
+    password: parsed.data.password,
+  });
+  if (signInError) return { ok: true, message: "Account created. Sign in to continue." };
+
+  revalidatePath("/", "layout");
+  redirect("/dashboard");
 }
 
 export async function signOut() {
