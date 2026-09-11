@@ -28,9 +28,9 @@
   --color-slate: #4a5b6c;
   --color-slate-soft: #e7ebef;
 
-  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-bricolage), var(--font-geist), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-display: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 
   --radius-xs: 4px;
   --radius-sm: 6px;
@@ -47,8 +47,7 @@
   html { color-scheme: light; }
   body {
     @apply bg-paper text-ink antialiased;
-    font-feature-settings: "ss01", "cv11";
-    text-rendering: optimizeLegibility;
+        text-rendering: optimizeLegibility;
   }
   ::selection { background: var(--color-gold-soft); color: var(--color-ink); }
   :focus-visible { outline: 2px solid var(--color-berkeley-2); outline-offset: 2px; border-radius: 3px; }
@@ -58,7 +57,7 @@
 }
 
 @layer components {
-  .display { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.03em; }
+  .display { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.025em; }
   .eyebrow { @apply text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-3; }
   .card { @apply rounded-lg border border-line bg-white shadow-card; }
   .link { @apply text-berkeley-2 underline decoration-berkeley-2/30 underline-offset-[3px] transition hover:decoration-berkeley-2; }

@@ -62,7 +62,7 @@ Fixed-window counters in Postgres (`consume_rate_limit`), keyed by a SHA-256 of 
 
 ### Design
 
-Navy, sky blue, lavender and ice, matched to the Cal Hacks 13.0 palette. Display type is Bricolage Grotesque, body is Geist; no serifs. The landing page uses real event photographs from Cal Hacks 12.0 (cropped from calhacks.io) and venue photographs of the Palace of Fine Arts (Unsplash). Motion is CSS only (floating polaroids, ticker, marquee, glow blobs, scroll reveal) and every animation is disabled under `prefers-reduced-motion`. Signed-in pages switch to a quiet paper background so forms and tables stay legible.
+Navy, sky blue, lavender and ice, matched to the Cal Hacks 13.0 palette. Type is the platform system sans (San Francisco, Segoe UI, Roboto); no web fonts, no serifs. The landing page uses real event photographs from Cal Hacks 12.0 (cropped from calhacks.io) and venue photographs of the Palace of Fine Arts (Unsplash). Motion is CSS only (floating polaroids, ticker, marquee, glow blobs, scroll reveal) and every animation is disabled under `prefers-reduced-motion`. Signed-in pages switch to a quiet paper background so forms and tables stay legible.
 
 ### The extra features
 
